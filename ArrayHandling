@@ -1,0 +1,114 @@
+package de.hrw.progra2.assignment1;
+import java.util.Arrays;
+public class ArrayHandling {
+
+    /**
+     * Converts a string with layout "n0,n1,n2,..." into an Integer array [n0, n1, n2].
+     * @param input string with numbers separated by semicolon
+     * @return integer array containing numbers of string
+     */
+    public static int[] stringToIntegerArray(String input) {
+
+
+        String[] inputNummer =  input.split(";");
+        int [] array = new int [input.length() / 2 + 1];
+
+        for (int i = 0; i < inputNummer.length; i++) {
+            array[i] = Integer.valueOf(inputNummer[i]);
+
+       }
+
+
+        System.out.println(Arrays.toString(array));
+        return array;
+    }
+
+    /**
+     * Writes Maltonacci progression to an array.
+     * @param n number up to which Maltonacci progression should be generated
+     * @return long array containing Maltonacci progression from 0 to n, null if n is negative
+     */
+    public static float[] makeMaltonacci(int n) {
+        // TODO: Implement
+
+
+        int result, prevNumber = 1, prevPrevNumber = 1;
+        float [] Maltonacci;
+        Maltonacci = new float [n+1];
+
+         if(n < 0){
+             System.err.println("BITTE POSITIVE ZAHL EINGEBEN " + n);
+         return null;
+         }
+
+        for(int i = 0; i <= n; i++){
+
+            if(i == 0) {
+                Maltonacci[i] = 1;
+            } else if(i == 1){
+                Maltonacci[i] = 1;
+            } else {
+
+                result = (5 * prevNumber) - (3 * prevPrevNumber);
+                prevPrevNumber = prevNumber;
+                prevNumber = result;
+                Maltonacci[i] = result;
+
+            }
+        }
+
+        System.out.println(Arrays.toString(Maltonacci));
+        return Maltonacci;
+    }
+
+    /**
+     * Converts a linear array to a square matrix.
+     * @param array 1D array with quadratic number of items
+     * @return square 2D array that contains the elements of the 1D array in square form, null
+     *   if number of elements is 0 or not quadratic
+     */
+    public static int[][] makeSquareMatrix(int[] array) {
+        // TODO: Implement
+
+        int numElements = 0;
+
+
+        for (int i = 0; i < array.length; i++) {
+        numElements++;
+    }
+        double sq = Math.sqrt(numElements);
+        int sq2 = (int) sq;
+        int[][] array2d = new int[sq2][sq2];
+
+        if((sq - Math.floor(sq)) == 0){
+
+            for(int i=0; i<sq2;i++)
+                for(int j=0;j<sq2;j++)
+                    array2d[i][j] = array[(j*sq2) + i];
+
+            System.out.println(Arrays.deepToString(array2d));
+            return array2d;
+
+      } else {
+          System.err.println("KEINE QUERSUMME ODER NEGATIV " + sq2);
+            return null;
+      }
+   }
+
+
+    /**
+     * Main program that tests above methods.
+     */
+    public static void main(String[] args) {
+        // TODO: Implement
+        String input = "1;2;3;4;5;6;7;8;9";
+        stringToIntegerArray(input);
+
+        int n = 5;
+        makeMaltonacci(n);
+
+        int []array = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+        makeSquareMatrix(array);
+
+    }
+}
