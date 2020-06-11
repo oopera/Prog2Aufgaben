@@ -1,0 +1,223 @@
+package de.hrw.progra2.assignment1;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class StringHandling {
+
+    /**
+     * Removes all vowels from a string.
+     * @param input string with vowels
+     * @return same string with removed vowels
+     */
+    public static String removeVowels(String input) {
+        StringBuilder RemovedVowels = new StringBuilder();
+
+        for (int i = 0; i < input.length() ; i++) {
+
+            char ch = input.charAt(i);
+
+            switch(ch)  {
+                case 'a':
+                    break;
+                case 'A':
+                    break;
+                case 'e':
+                    break;
+                case 'E':
+                    break;
+                case 'o':
+                    break;
+                case 'O':
+                    break;
+                case 'i':
+                    break;
+                case 'I':
+                    break;
+                case 'u':
+                    break;
+                case 'U':
+                    break;
+                default:
+                   RemovedVowels.append(ch);
+            }
+        }
+        input = RemovedVowels.toString();
+        System.out.println(input);
+        return input;
+    }
+
+    /**
+     * Generates a praise for a given person and points.
+     * @param lastName last name of person
+     * @param gender gender, must be 'm' or 'w'
+     * @param score score
+     * @return praise as string, or null if parameters are invalid
+     */
+    public static String generatePraise(String lastName, char gender, int score) {
+
+        String Score = "dein score ist: ";
+        String praise = "toll, volle Punktzahl!";
+        String indifference = "bestanden.";
+        String scold = "beim naechsten mal klappt es!";
+        String Anrede = "wow! ";
+        String fehlermeldung = "FEHLER";
+        String FullPraise = "";
+
+        if (gender == 'm') {
+             Anrede = "Herr";
+        }
+        else if (gender == 'w') {
+             Anrede = "Frau";
+        }
+        else {
+            System.err.println(fehlermeldung + " bitte binaeres gender angeben " + gender);
+        }
+
+        if (score == 100) {
+             FullPraise = Anrede + " " + lastName + ", " + Score + " " + score + ", " + praise;
+
+        }
+        else if (score >= 50 && score < 100) {
+             FullPraise = Anrede + " " + lastName + ", " + Score + " " + score + ", " + indifference;
+
+        }
+        else if (score < 49 && score >= 0) {
+             FullPraise = Anrede + " " + lastName + ", " + Score + " " + score + ", " + scold;
+
+        }
+            else {
+                System.err.println(fehlermeldung + " bitte korrekten score (0-100) angeben - " + score);
+                return null;
+        }
+        System.out.println(FullPraise);
+        return FullPraise;
+    }
+
+    /**
+     * Converts a string consisting of a digits into a large ascii art letters. Letters should like like this:
+     *
+     * OOOOO ..O.. OOOOO OOOOO O...O OOOOO OOOOO OOOOO OOOOO OOOOO
+     * O...O ..O.. ....O ....O O...O O.... O.... ....O O...O O...O
+     * O...O ..O.. OOOOO OOOOO OOOOO OOOOO OOOOO ....O OOOOO OOOOO
+     * O...O ..O.. O.... ....O ....O ....O O...O ....O O...O ....O
+     * OOOOO ..O.. OOOOO OOOOO ....O OOOOO OOOOO ....O OOOOO OOOOO
+     *
+     * @param letters string consisting of digits only
+     * @return ascii art letter representation, or null if string contains non-digit characters
+     */
+    public static String makeAsciiArtLetters(String letters) {
+
+        StringBuilder BigBoiLetters = new StringBuilder();
+
+        for (int i = 0; i < letters.length() ; i++) {
+
+            char ch = letters.charAt(i);
+
+            switch(ch)  {
+                case '1':
+                    String I = "..O..\n..O..\n..O..\n..O..\n..O..\n";
+                    BigBoiLetters.append(I);
+                    break;
+                case '2':
+                    String II = "OOOOO\n....O\nOOOOO\nO....\nOOOOO\n";
+                    BigBoiLetters.append(II);
+                    break;
+                case '3':
+                    String III = "OOOOO\n....O\nOOOOO\n....O\nOOOOO\n";
+                    BigBoiLetters.append(III);
+                    break;
+                case '4':
+                    String IV = "O...O\nO...O\nOOOOO\n....O\n....O\n";
+                    BigBoiLetters.append(IV);
+                    break;
+                case '5':
+                    String V = "OOOOO\nO....\nOOOOO\n....O\nOOOOO\n";
+                    BigBoiLetters.append(V);
+                    break;
+                case '6':
+                    String VI = "OOOOO\nO....\nOOOOO\nO...O\nOOOOO\n";
+                    BigBoiLetters.append(VI);
+                    break;
+                case '7':
+                    String VII = "OOOOO\n....O\n ....O\n....O\n....O\n";
+                    BigBoiLetters.append(VII);
+                    break;
+                case '8':
+                    String VIII = "OOOOO\nO...O\nOOOOO\nO...O\nOOOOO\n";
+                    BigBoiLetters.append(VIII);
+                    break;
+                case '9':
+                    String IX = "OOOOO\nO...O\nOOOOO\n....O\nOOOOO\n";
+                    BigBoiLetters.append(IX);
+                    break;
+                case '0':
+                    String N = "OOOOO\nO...O\nO...O\nO...O\nOOOOO\n";
+                    BigBoiLetters.append(N);
+                    break;
+                default:
+                    System.err.println("Unzulaessige Symbole, bitte 0/9 nutzen " + letters);
+                    return null;
+
+            }
+        }
+
+        letters = BigBoiLetters.toString();
+        System.out.println(letters);
+        return letters;
+
+    }
+
+    /**
+     * Extracts all age annotation in brackets from a text and returns average of all ages.
+     * @param strings text with age annotations
+     * @return average age, or null if no age annotations exist in text
+     */
+    public static Double computeAverageAgeInText(String strings) {
+
+
+        double numbers = 0;
+        double groups = 0;
+
+        List<String> Alter = new ArrayList<String>();
+        Pattern Klammern = Pattern.compile("\\((.*?)\\)");
+        Matcher KlammerFinder = Klammern.matcher(strings);
+
+        while (KlammerFinder.find()) {
+            Alter.add(KlammerFinder.group(1));
+            groups++;
+        }
+        for (String str : Alter) {
+            numbers += Integer.parseInt(str);
+        }
+        if (numbers != 0) {
+            double Durschschnitt = numbers / groups;
+            System.out.println("der Durchschnitt ist " + Durschschnitt);
+            return Durschschnitt;
+        } else {
+            System.err.println("FEHLENDE ALTERSANGABE" + strings);
+            return null;
+        }
+    }
+
+    /**
+     * Main program that tests above methods.
+     */
+    public static void main(String[] args) {
+        String input = "Remove Vowels";
+        removeVowels(input);
+
+        String lastName = "Lichner";
+        char gender = 'm';
+        int score = 75;
+        generatePraise(lastName,  gender,  score);
+
+        String letters = "66x6";
+        makeAsciiArtLetters(letters);
+
+        String strings = "Bob (23) hat heute den Kurs besucht.\n" + "Dabei ist ihm Alice (21) direkt aufgefallen.";
+        computeAverageAgeInText(strings);
+    }
+}
