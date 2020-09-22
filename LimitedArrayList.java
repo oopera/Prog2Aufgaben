@@ -34,7 +34,7 @@ public class LimitedArrayList<T> {
     public void addElement(T element) {
 
         if (arrayList.size() >= maxCount) {
-            System.err.println("Element konnte nicht hinzugefügt werden, die Liste ist voll.");
+            System.err.println("Element konnte nicht geadded werden, die Liste ist voll.");
         } else {
             arrayList.add(element);
         }

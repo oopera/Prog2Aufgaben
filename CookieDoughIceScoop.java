@@ -135,7 +135,7 @@ public class CookieDoughIceScoop implements Comparable<CookieDoughIceScoop> {
         Collections.sort(cookieDoughIceScoop,new iceCreamAmountComparator());
         System.out.println("Sortierung nach Eiskugeln \n");
         System.out.println(cookieDoughIceScoop);
-        System.out.println("Sortierung nach Keksstücken \n");
+        System.out.println("Sortierung nach Keksstürkcne \n");
         Collections.sort(cookieDoughIceScoop, new CookieAmountComparator());
         System.out.println(cookieDoughIceScoop);
     }
